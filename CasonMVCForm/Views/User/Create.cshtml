@@ -1,0 +1,80 @@
+﻿<script src="~/Scripts/jquery-3.0.0.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+
+@model CasonMVCForm.Models.User
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@Html.AntiForgeryToken()
+@Html.ValidationSummary(true)
+
+<h1>Registration Form</h1>
+<hr />
+<h2>@ViewData["Message"]</h2>
+<hr />
+<table class="table-success">
+    @if (ViewBag.Users != null)
+    {
+        @foreach (var item in ViewBag.Users)
+        {
+            <tr>
+                <td>
+                    @item.ToString();
+                </td>
+            </tr>
+        }
+    }
+</table>
+<hr />
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" id="tb_name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" id="tb_email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" id="tb_pw" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label">Gender</label>
+                <select asp-for="Gender" id="dd_name">
+                    <option>Female</option>
+                    <option>Male</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="BirthDate" class="control-label"></label>
+                <input asp-for="BirthDate" class="form-control" id="tb_birthdate" />
+                <span asp-validation-for="BirthDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Comment" class="control-label"></label>
+                <input asp-for="Comment" class="form-control" />
+                <span asp-validation-for="Comment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="OK" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
